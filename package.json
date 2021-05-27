@@ -8,13 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.1",
+    "@tailwindcss/line-clamp": "^0.2.1",
+    "antd": "^4.16.0",
     "next": "latest",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-currency-formatter": "^1.1.0",
+    "react-dom": "^17.0.1",
+    "react-multi-carousel": "^2.6.3",
+    "react-responsive-carousel": "^3.2.18"
   },
   "devDependencies": {
-    "autoprefixer": "^10.0.4",
-    "postcss": "^8.1.10",
-    "tailwindcss": "^2.1.1"
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.15",
+    "tailwindcss": "^2.1.2"
   }
 }

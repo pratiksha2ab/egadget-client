@@ -1,7 +1,8 @@
-import Head from 'next/head'
-import Banner from '../components/Banner'
-import Header from '../components/Header'
-import ProductFeed from '../components/ProductFeed'
+import Head from "next/head";
+import Banner from "../components/Banner";
+import Header from "../components/Header";
+import ProductFeed from "../components/ProductFeed";
+// import SignIn from "../components/SignIn";
 
 export default function Home({ products }) {
   return (
@@ -11,23 +12,23 @@ export default function Home({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-       <Header />
+      <Header />
       <main className="max-w-screen-xl mx-auto">
         <Banner />
-        <ProductFeed products={products}/>
+        <ProductFeed products={products} />
+        {/* <SignIn /> */}
       </main>
-  
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
   const products = await fetch("https://fakestoreapi.com/products").then(
-    (res)=> res.json()
-  )
-  return{
+    (res) => res.json()
+  );
+  return {
     props: {
       products,
-    }
-  }
+    },
+  };
 }

@@ -23,7 +23,7 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch("https://fakestoreapi.com/products").then(
+  const products = await fetch("http://localhost:5000/api/v1/product").then(
     (res) => res.json()
   );
   return {
@@ -32,3 +32,5 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+// https://fakestoreapi.com/products

@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Banner from "../components/Banner";
-import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
 // import SignIn from "../components/SignIn";
 
@@ -11,8 +10,6 @@ export default function Home({ products }) {
         <title>NepPharm</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header />
       <main className="max-w-screen-xl mx-auto">
         <Banner />
         <ProductFeed products={products} />
@@ -23,8 +20,8 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch("http://localhost:5000/api/v1/product").then(
-    (res) => res.json()
+  const products = await fetch("http://localhost:5000/product").then((res) =>
+    res.json()
   );
   return {
     props: {

@@ -1,5 +1,5 @@
+import Axios from "axios";
 let KhaltiConfig = {
-  // replace this key with yours
   publicKey: process.env.test_public_key,
   productIdentity: "1234567890",
   productName: "NepPharm",
@@ -8,6 +8,14 @@ let KhaltiConfig = {
     onSuccess(payload) {
       // hit merchant api for initiating verfication
       console.log(payload);
+      // Axios({
+      //   method: "POST",
+      //   url: "http://localhost:5000/khalti",
+      //   data: {
+      //     amount: payload.amount,
+      //     token: payload.token,
+      //   },
+      // });
     },
     // onError handler is optional
     onError(error) {

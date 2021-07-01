@@ -6,6 +6,10 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily:{
+      montserrat: ["Montserrat"],
+      opensans: ["Open Sans"],
+    },
     extend: {
       colors: {
         neppharm_green: {

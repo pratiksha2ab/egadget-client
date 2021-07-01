@@ -1,4 +1,3 @@
-import Header from "../components/Header";
 import BlogContent from "../components/BlogContent";
 function Blog() {
   const bloglist = [
@@ -60,7 +59,6 @@ function Blog() {
   ];
   return (
     <div className="bg-gray-100">
-      <Header />
       <div className=" max-w-screen-xl mx-auto ">
         <div className="p-4 border-b">
           <h1 className="font-bold text-2xl md:text-3xl">Health Library</h1>

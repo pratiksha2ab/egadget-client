@@ -7,8 +7,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily:{
-      montserrat: ["Montserrat"],
-      opensans: ["Open Sans"],
+      "worksans": ["Work Sans"],
     },
     extend: {
       colors: {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Input, Upload, message, notification } from "antd";
-
 import "antd/dist/antd.css";
 import { auth } from "../../utils/firebase";
 import { useRouter } from "next/router";
@@ -17,6 +16,7 @@ function Signup() {
   });
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
   const handleFormSubmit = async () => {
     setLoading(true);
     try {
@@ -25,36 +25,33 @@ function Signup() {
         userDetail.password
       );
       const users = auth.currentUser;
+      await Axios({
+        method: "POST",
+        url: "http://localhost:5000/users",
+        data: {
+          fullName: userDetail.fullName,
+          email: userDetail.email,
+          address: userDetail.address,
+          phone: userDetail.phone,
+          photoUrl: userDetail.photoUrl,
+          uid: users.uid,
+        },
+      });
       await users.sendEmailVerification({ url: "http://localhost:3000/" });
       notification.success({
         message: "Verification Link Sent to",
         description: userDetail?.email,
       });
-      console.log(userDetail);
+      // console.log(userDetail);
 
-      // router.push("/signin");
+      router.push("/signin");
     } catch (e) {
-      message.error(e?.message);
+      const users = auth.currentUser;
+      auth.currentUser.delete();
+      auth.signOut();
       if (e.message) notification.error({ message: e?.message });
       else notification.error({ message: "Error Occured" });
     }
-    await Axios({
-      method: "POST",
-      url: "http://localhost:5000/users",
-      data: {
-        fullName: userDetail.fullName,
-        email: userDetail.email,
-        address: userDetail.address,
-        phone: userDetail.phone,
-        photoUrl: userDetail.photoUrl,
-      },
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
     setLoading(false);
   };
 

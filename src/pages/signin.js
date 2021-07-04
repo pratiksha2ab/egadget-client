@@ -29,7 +29,7 @@ const SignIn = () => {
       //   description: "Welcome to NepPharm",
       // });
       setUser(user);
-      router.back();
+      // router.back();
     } catch (e) {
       message.error(e?.message);
     }

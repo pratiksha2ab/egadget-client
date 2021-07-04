@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline";
 import { Modal, Button, Upload, Avatar, Popover, Menu } from "antd";
 import { UploadOutlined, UserOutlined } from "@ant-design/icons";
@@ -35,7 +36,7 @@ function Header() {
   };
   console.log("user>>", user);
   return (
-    <header className="sticky top-0 z-50 font-montserrat">
+    <header className="sticky top-0 z-50 ">
       {/* top nav */}
       <div className="flex items-center bg-gradient-to-tl from-green-500 to-green-700  flex-grow py-2 p-1 ">
         <div className="flex h-10 items-center flex-grow sm:flex-grow-0">
@@ -113,10 +114,14 @@ function Header() {
           <SearchIcon className="h-12 p-4 text-white" />
         </div>
       </div>
-      <div className=" pt-2 pl-2 sm:pl-8 flex  text-center space-x-2  text-xs sm:text-sm sm:space-x-6  bg-gradient-to-b from-green-500 to-green-600  text-white tracking-wide font-semibold">
-        <p className="link">Medicines</p>
+      <div className=" pt-2 pl-2 sm:pl-8 flex space-x-2  text-xs sm:text-sm sm:space-x-6  bg-gradient-to-b from-green-500 to-green-600  text-white tracking-wide font-semibold">
+        <Link href="/product/medicines">
+          <p className="link">Medicines</p>
+        </Link>
 
-        <p className="link">Health Products</p>
+        <Link href="/product/healthproducts">
+          <p className="link">Health Products</p>
+        </Link>
 
         <p className="link">Diagnostic</p>
 

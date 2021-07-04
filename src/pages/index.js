@@ -12,6 +12,9 @@ export default function Home({ products }) {
       </Head>
       <main className="max-w-screen-xl mx-auto">
         <Banner />
+        <div className="bg-gray-200">
+          <p className="text-lg md:text-3xl font-bold text-gray-700 px-8 py-2">Recently added products</p>
+        </div>
         <ProductFeed products={products} />
         {/* <SignIn /> */}
       </main>
@@ -20,9 +23,14 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch("http://localhost:5000/product").then((res) =>
+  const pr = await fetch("http://localhost:5000/product").then((res) =>
     res.json()
   );
+  const products = await pr.filter((prod)=> {
+    if(prod.requirePrescription){
+      return prod
+    }
+  })
   return {
     props: {
       products,

@@ -1,4 +1,3 @@
-import Header from "../../../components/Header";
 import { Form, Input, Button } from "antd";
 import "antd/dist/antd.css";
 import { useContext, useEffect, useState } from "react";
@@ -30,35 +29,34 @@ function Checkout() {
     console.log(deliveryDetails);
   };
 
-  const handlePhoneVerification = () => {
-    const phonenumber = "+977" + deliveryDetails.phone;
-    console.log(phonenumber);
-    let recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha");
-    firebase
-      .auth()
-      .signInWithPhoneNumber(phonenumber, recaptcha)
-      .then(function (e) {
-        let code = window.prompt("enter otp", "");
-        if (code == null) return;
-        e.confirm(code)
-          .then(function (result) {
-            console.log(result.user, "user");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
-  };
+  // const handlePhoneVerification = () => {
+  //   const phonenumber = "+977" + deliveryDetails.phone;
+  //   console.log(phonenumber);
+  //   let recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha");
+  //   firebase
+  //     .auth()
+  //     .signInWithPhoneNumber(phonenumber, recaptcha)
+  //     .then(function (e) {
+  //       let code = window.prompt("enter otp", "");
+  //       if (code == null) return;
+  //       e.confirm(code)
+  //         .then(function (result) {
+  //           console.log(result.user, "user");
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     });
+  // };
   return (
     <>
-      <Header />
       <main className="max-w-screen-md mx-auto">
         <div className="bg-white p-4 border-b space-y-10">
           <h1 className="text-lg md:text-2xl">Please fill the details</h1>
         </div>
         <div className="max-w-md mx-auto p-4">
           <Form layout="vertical" requiredMark={false}>
-            <div id="recaptcha"></div>
+            {/* <div id="recaptcha"></div> */}
             <Form.Item
               label={<h2 className="text-lg md:text-xl">Location</h2>}
               name="location"
@@ -90,9 +88,9 @@ function Checkout() {
                 }
               />
 
-              <button className="button" onClick={handlePhoneVerification}>
+              {/* <button className="button" onClick={handlePhoneVerification}>
                 Verify
-              </button>
+              </button> */}
             </Form.Item>
             <Form.Item>
               <button

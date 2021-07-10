@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import Header from "../../components/Header";
 import { selectItems, selectTotal } from "../../slices/cartSlice";
 import CheckOutProduct from "../../components/CheckOutProduct";
 import { useRouter } from "next/router";
@@ -12,9 +11,9 @@ function Checkout() {
   const router = useRouter();
   const { user } = useContext(AuthContext);
   console.log("user>>>", user);
+  console.log("item>>>", items);
   return (
     <div className="bg-gray-200">
-      <Header />
       <main className="lg:flex max-w-screen-xl mx-auto">
         {/* left */}
         <div className="flex-grow m-5 shadow-sm">
@@ -48,9 +47,9 @@ function Checkout() {
             </>
           )}
           <button
-            disabled={!user}
+            disabled={!user && items.length === 0}
             className={`button mt-2 ${
-              !user &&
+              (items.length === 0 || !user) &&
               "from-gray-300 to-gray-500 border-gray-200 text-gray-100 cursor-not-allowed"
             }`}
             onClick={() => router.push("/cart/checkout")}

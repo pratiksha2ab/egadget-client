@@ -1,8 +1,6 @@
 import Head from "next/head";
 import Banner from "../components/Banner";
-import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
-// import SignIn from "../components/SignIn";
 
 export default function Home({ products }) {
   return (
@@ -11,27 +9,33 @@ export default function Home({ products }) {
         <title>NepPharm</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header />
-      <main className="max-w-screen-xl mx-auto">
+      <main className="max-w-screen-xl mx-auto pb-4">
         <Banner />
+        <div className="bg-gray-200">
+          <p className="text-md sm:text-lg md:text-3xl font-bold text-gray-700 px-8 py-2">
+            Recently added products
+          </p>
+        </div>
         <ProductFeed products={products} />
-        {/* <SignIn /> */}
       </main>
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch("http://localhost:5000/api/v1/product").then(
-    (res) => res.json()
+  const pr = await fetch("http://localhost:5000/product").then((res) =>
+    res.json()
   );
+  // const products = await pr.filter((prod) => {
+  //   if (prod.requirePrescription) {
+  //     return prod;
+  //   }
+  // });
   return {
     props: {
-      products,
+      products: pr,
     },
   };
 }
 
 // https://fakestoreapi.com/products
-

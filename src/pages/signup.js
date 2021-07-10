@@ -1,48 +1,61 @@
 import React, { useEffect, useState } from "react";
-import {
-  Form,
-  Button,
-  Input,
-  Select,
-  Upload,
-  message,
-  notification,
-} from "antd";
-
+import { Form, Button, Input, Upload, message, notification } from "antd";
 import "antd/dist/antd.css";
-import { auth, firebase } from "../../utils/firebase";
+import { auth } from "../../utils/firebase";
 import { useRouter } from "next/router";
-import axios from "axios";
-import Image from "next/image";
+import Axios from "axios";
 
 function Signup() {
-  const [user, setUser] = useState({
+  const [userDetail, setUserDetail] = useState({
     email: "",
     password: "",
-    username: "",
+    fullName: "",
     address: "",
     phone: "",
+    photoUrl: null,
   });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = async () => {
+    // setLoading(true);
     try {
-      await auth.createUserWithEmailAndPassword(user.email, user.password);
+      await auth.createUserWithEmailAndPassword(
+        userDetail.email,
+        userDetail.password
+      );
       const users = auth.currentUser;
+      console.log("my id>>>", users.uid);
+      await Axios({
+        method: "POST",
+        url: "http://localhost:5000/users",
+        data: {
+          id: users.uid,
+          fullName: userDetail.fullName,
+          email: userDetail.email,
+          address: userDetail.address,
+          phone: userDetail.phone,
+          photoUrl: userDetail.photoUrl,
+        },
+      });
       await users.sendEmailVerification({ url: "http://localhost:3000/" });
       notification.success({
         message: "Verification Link Sent to",
-        description: user?.email,
+        description: userDetail?.email,
       });
-      router.push("/signin");
+      // console.log(userDetail);
+
+      // router.push("/signin");
     } catch (e) {
-      message.error(e?.message);
+      const users = auth.currentUser;
+      users.delete();
+      users.signOut();
       if (e.message) notification.error({ message: e?.message });
       else notification.error({ message: "Error Occured" });
     }
+    //setLoading(false);
   };
 
-  const [fileList, setFileList] = useState();
   function getBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -55,8 +68,8 @@ function Signup() {
     console.log(info.file);
     if (info.file.status === "done") {
       const file = await getBase64(info.file.originFileObj);
-      console.log(file);
-      setFileList(file);
+      // console.log(file);
+      setUserDetail({ ...userDetail, photoUrl: file });
     }
   };
   const dummyRequest = ({ file, onSuccess }) => {
@@ -65,27 +78,22 @@ function Signup() {
     }, 0);
   };
   return (
-    <div className="bg-gradient-to-tl from-green-500 to-green-700 h-auto ">
-      <div className="flex flex-col justify-items-center items-center p-6 max-w-md mx-auto">
+    <div className="bg-gray-100">
+      <p className="text-md md:text-xl py-2 pl-6 text-gray-400 font-semibold border-b">
+        Sign Up to NepPharm
+      </p>
+      <div className="flex flex-col justify-items-center items-center max-w-md mx-auto p-2">
         <Form
           onFinish={handleFormSubmit}
           layout="vertical"
-          className=" w-full p-6 rounded mx-auto shadow-xl"
+          className=" w-full p-6 rounded mx-auto"
+          requiredMark={false}
         >
-          <div className="my-6 flex cursor-pointer">
-            <Image
-              width={160}
-              height={50}
-              src="/neppharm.png"
-              objectFit="contain"
-              onClick={() => router.push("/")}
-            />
-          </div>
           <div className="flex items-center justify-center">
-            {fileList && (
+            {userDetail.photoUrl && (
               <img
                 className="w-16 h-16 rounded-full object-cover bg-gray-100 mb-2"
-                src={fileList}
+                src={userDetail.photoUrl}
                 alt="profile image"
               />
             )}
@@ -103,7 +111,9 @@ function Signup() {
 
           <Form.Item
             name="username"
-            label={<strong className="text-lg text-white">Full Name </strong>}
+            label={
+              <strong className="text-lg text-gray-500">Full Name </strong>
+            }
             rules={[
               {
                 required: true,
@@ -115,12 +125,16 @@ function Signup() {
             <Input
               placeholder="full name"
               size="large"
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              onChange={(e) =>
+                setUserDetail({ ...userDetail, fullName: e.target.value })
+              }
             />
           </Form.Item>
           <Form.Item
             name="phone"
-            label={<strong className="text-lg text-white">Phone Number</strong>}
+            label={
+              <strong className="text-lg text-gray-500">Phone Number</strong>
+            }
             rules={[
               { required: true, message: "Please input your phone number!" },
             ]}
@@ -130,14 +144,29 @@ function Signup() {
               type="number"
               placeholder="phone number"
               size="large"
-              onChange={(e) => setUser({ ...user, phone: e.target.value })}
+              onChange={(e) =>
+                setUserDetail({ ...userDetail, phone: e.target.value })
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            name="address"
+            label={<strong className="text-lg text-gray-500">Address</strong>}
+            rules={[{ required: true, message: "Please input your address!" }]}
+          >
+            <Input
+              placeholder="address"
+              size="large"
+              onChange={(e) =>
+                setUserDetail({ ...userDetail, address: e.target.value })
+              }
             />
           </Form.Item>
 
           <Form.Item
             name="email"
             label={
-              <strong className="text-lg text-white">E-mail Address </strong>
+              <strong className="text-lg text-gray-500">E-mail Address </strong>
             }
             rules={[
               {
@@ -153,13 +182,15 @@ function Signup() {
             <Input
               placeholder="email"
               size="large"
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              onChange={(e) =>
+                setUserDetail({ ...userDetail, email: e.target.value })
+              }
             />
           </Form.Item>
 
           <Form.Item
             name="password"
-            label={<strong className="text-lg text-white">Password</strong>}
+            label={<strong className="text-lg text-gray-500">Password</strong>}
             rules={[
               {
                 required: true,
@@ -173,7 +204,9 @@ function Signup() {
           <Form.Item
             name="confirm"
             label={
-              <strong className="text-lg text-white">Confirm Password </strong>
+              <strong className="text-lg text-gray-500">
+                Confirm Password{" "}
+              </strong>
             }
             dependencies={["password"]}
             hasFeedback
@@ -199,7 +232,9 @@ function Signup() {
             <Input.Password
               placeholder=" re-enter password"
               size="large"
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              onChange={(e) =>
+                setUserDetail({ ...userDetail, password: e.target.value })
+              }
             />
           </Form.Item>
 
@@ -208,6 +243,11 @@ function Signup() {
               type="primary"
               htmlType="submit"
               className="my-3 text-md w-full"
+              style={{
+                backgroundColor: "#48BB78",
+                border: "#48BB78",
+              }}
+              loading={loading}
             >
               Sign Up
             </Button>

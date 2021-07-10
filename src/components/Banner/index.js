@@ -20,23 +20,26 @@ function Banner() {
     },
   };
   return (
-    <div className="relative">
-      <div className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent bottom-0 z-20" />
+    <div className="relative z-20">
+      <div className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent bottom-0 " />
       <Carousel
         responsive={responsive}
         infinite={true}
         autoPlay
         ssr={true}
-        arrows={false}
+        arrows={true}
+        removeArrowOnDeviceType={["tablet","mobile"]}
+        renderArrowsWhenDisabled={true}
+        
       >
         <div>
-          <img src="./b1.jpg" alt="" />
+          <img src="https://res.cloudinary.com/odin/image/upload/v1625203385/neppharm_banners/b2_ip61ml.jpg" alt="capsule-banner" />
         </div>
         <div>
-          <img src="./b2.jpg" alt="" />
+          <img src="https://res.cloudinary.com/odin/image/upload/v1625203631/neppharm_banners/b1_hxpw7s.jpg" alt="thermometer-banner" />
         </div>
         <div>
-          <img src="./b3.jpg" alt="" />
+          <img src="https://res.cloudinary.com/odin/image/upload/v1625203684/neppharm_banners/b3_kpmyzk.jpg" alt="kit-banner" />
         </div>
       </Carousel>
     </div>

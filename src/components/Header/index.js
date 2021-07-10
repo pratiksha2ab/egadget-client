@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline";
 import { Modal, Button, Upload, Avatar, Popover, Menu } from "antd";
 import { UploadOutlined, UserOutlined } from "@ant-design/icons";
@@ -6,21 +7,24 @@ import "antd/dist/antd.css";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectItems } from "../../slices/cartSlice";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../utils/AuthContext";
 import { firebase } from "../../../utils/firebase";
+import Axios from "axios";
 function Header() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, loggedInUser, setLoggedInUser } =
+    useContext(AuthContext);
   const router = useRouter();
   const items = useSelector(selectItems);
   const [isVisible, setIsVisible] = useState(false);
   const content = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="1">
         <Button
           onClick={() => {
             firebase.auth().signOut();
             setUser(null);
+            setLoggedInUser(null);
           }}
         >
           Logout
@@ -33,43 +37,48 @@ function Header() {
     console.log("OK Clicked");
     setIsVisible(false);
   };
-  console.log("user>>", user);
   return (
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-50 font-roboto ">
       {/* top nav */}
-      <div className="flex items-center bg-gradient-to-tl from-green-500 to-green-700 p-1 flex-grow py-2 ">
-        <div className="p-2 flex items-center flex-grow sm:flex-grow-0">
+      <div className="flex items-center bg-gradient-to-tl from-green-500 to-green-700  flex-grow py-2 p-1 ">
+        <div className="flex h-10 items-center flex-grow sm:flex-grow-0">
           <Image
             onClick={() => router.push("/")}
-            src="/logo2.png"
-            width={150}
+            src="/l.png"
+            width={160}
             height={50}
-            quality="100"
             objectFit="contain"
             className="cursor-pointer"
           />
         </div>
-        <div className=" hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500">
+        <div className=" hidden sm:flex items-center max-w-xl mx-auto h-10 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500">
           <input
-            className="p-2  h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
+            className="p-2 text-lg text-gray-700  h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
             type="text"
           />
           <SearchIcon className="h-12 p-4 text-white" />
         </div>
-        <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap ">
+        <div className="text-white flex items-center text-base md:space-x-10 mx-6 whitespace-nowrap">
           {!user ? (
             <div className="link" onClick={() => router.push("/signin")}>
-              <p>Hello, Guest</p>
-              <span className="text-sm font-bold tracking-wide">Sign In</span>
+              <span className="text-sm font-bold tracking-wide md:text-base">
+                Sign In
+              </span>
             </div>
           ) : (
             <Popover
               content={content}
               placement="bottom"
-              className="md:flex p-4"
+              className="inline-flex p-4 space-x-2"
             >
-              <Avatar size="small" icon={<UserOutlined />} />
-              <p className="md:px-4 my-auto">{user?.email}</p>
+              <Avatar
+                size="small"
+                icon={<UserOutlined />}
+                src={loggedInUser?.data.photoUrl}
+              />
+              <p className="my-auto text-sm md:text-md md:font-semibold">
+                Hello, {loggedInUser?.data?.fullName?.split(" ")[0]}
+              </p>
             </Popover>
           )}
           {/* <div className=" link flex">
@@ -84,10 +93,10 @@ function Header() {
             onClick={() => router.push("/cart")}
             className="link relative flex items-center"
           >
-            <span className="absolute top-0 right-0 h-4 w-4 bg-blue-500 text-center rounded-full text-white font-bold">
+            <span className="absolute top-0 right-0 h-2 w-2 md:h-4 md:w-4 flex items-center justify-center bg-blue-500 text-center rounded-full text-white font-bold">
               {items.length}
             </span>
-            <ShoppingCartIcon className="link h-10 text-white" />
+            <ShoppingCartIcon className="link h-7 md:h-10 text-white" />
           </div>
         </div>
         {/* <Modal
@@ -104,35 +113,30 @@ function Header() {
         </Modal> */}
       </div>
       {/* bottom nav */}
-      <div className=" p-2 bg-gradient-to-b from-green-500 to-green-600 sm:hidden">
+      <div className="p-2 bg-gradient-to-b from-green-500 to-green-600 sm:hidden">
         <div className="flex items-center h-8 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500 ">
           <input
-            className="p-2  h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
+            className="text-gray-700 p-2  h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
             type="text"
           />
           <SearchIcon className="h-12 p-4 text-white" />
         </div>
       </div>
-      <div className="flex text-center items-center text-xs bg-gradient-to-b from-green-500 to-green-600 justify-around md:text-sm text-white tracking-wide font-semibold  p-2">
-        <div className="link">
-          <p>Medicines</p>
-        </div>
+      <div className=" pt-2 pl-2 sm:pl-8 flex space-x-2  text-xs sm:text-sm sm:space-x-6  bg-gradient-to-b from-green-500 to-green-600  text-white tracking-wide font-semibold">
+        <Link href="/product/medicines">
+          <p className="link">Medicines</p>
+        </Link>
 
-        <div className="link">
-          <p>Health Products</p>
-        </div>
+        <Link href="/product/healthproducts">
+          <p className="link">Health Products</p>
+        </Link>
 
-        <div className="link">
-          <p>Diagnostic</p>
-        </div>
-
-        <div className="link" onClick={() => router.push("/blog")}>
-          <p>Health Corner</p>
-        </div>
+        <p className="link" onClick={() => router.push("/blog")}>
+          Health Corner
+        </p>
       </div>
     </header>
   );
 }
 
 export default Header;
-

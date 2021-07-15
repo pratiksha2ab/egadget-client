@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Banner from "../components/Banner";
+import Footer from "../components/Footer";
 import ProductFeed from "../components/ProductFeed";
-
+import Header from "../components/Header";
 export default function Home({ products }) {
   return (
     <div className="bg-gray-100">
@@ -9,6 +10,7 @@ export default function Home({ products }) {
         <title>NepPharm</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <main className="max-w-screen-xl mx-auto pb-4">
         <Banner />
         <div className="bg-gray-200">
@@ -18,6 +20,7 @@ export default function Home({ products }) {
         </div>
         <ProductFeed products={products} />
       </main>
+      <Footer />
     </div>
   );
 }

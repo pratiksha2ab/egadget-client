@@ -4,7 +4,6 @@ import { firebase } from "./firebase";
 export const AuthContext = createContext();
 import { useRouter } from "next/router";
 import Axios from "axios";
-import { async } from "q";
 const AuthProvider = (props) => {
   const [user, setUser] = useState();
   const [loggedInUser, setLoggedInUser] = useState();

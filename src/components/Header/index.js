@@ -10,7 +10,8 @@ import { selectItems } from "../../slices/cartSlice";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../utils/AuthContext";
 import { firebase } from "../../../utils/firebase";
-import Axios from "axios";
+import Search from "../Search";
+
 function Header() {
   const { user, setUser, loggedInUser, setLoggedInUser } =
     useContext(AuthContext);
@@ -51,14 +52,16 @@ function Header() {
             className="cursor-pointer"
           />
         </div>
-        <div className=" hidden sm:flex items-center max-w-xl mx-auto h-10 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500">
-          <input
+        <div className="hidden sm:flex items-center max-w-xl mx-auto h-10 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500 relative">
+          <Search />
+          {/* <input
             className="p-2 text-lg text-gray-700  h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
             type="text"
           />
-          <SearchIcon className="h-12 p-4 text-white" />
+          <SearchIcon className="h-12 p-4 text-white" /> */}
         </div>
-        <div className="text-white flex items-center text-base md:space-x-10 mx-6 whitespace-nowrap">
+
+        <div className="text-white flex items-center text-base space-x-4 md:space-x-10 mx-6 whitespace-nowrap">
           {!user ? (
             <div className="link" onClick={() => router.push("/signin")}>
               <span className="text-sm font-bold tracking-wide md:text-base">
@@ -114,12 +117,13 @@ function Header() {
       </div>
       {/* bottom nav */}
       <div className="p-2 bg-gradient-to-b from-green-500 to-green-600 sm:hidden">
-        <div className="flex items-center h-8 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500 ">
-          <input
+        <div className="flex items-center h-8 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500 relative ">
+          {/* <input
             className="text-gray-700 p-2  h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
             type="text"
           />
-          <SearchIcon className="h-12 p-4 text-white" />
+          <SearchIcon className="h-12 p-4 text-white" /> */}
+          <Search />
         </div>
       </div>
       <div className=" pt-2 pl-2 sm:pl-8 flex space-x-2  text-xs sm:text-sm sm:space-x-6  bg-gradient-to-b from-green-500 to-green-600  text-white tracking-wide font-semibold">

@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <Header/>
+        {/* <Header /> */}
         <Component {...pageProps} />
       </AuthProvider>
     </Provider>

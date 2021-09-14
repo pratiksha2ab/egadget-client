@@ -40,7 +40,7 @@ function Product({
   };
 
   return (
-    <div className="relative flex flex-col m-5 bg-white z-30 p-10 shadow-md rounded">
+    <div className="relative flex flex-col m-5 bg-white z-30 px-10 py-5 shadow-md rounded hover:shadow-xl transition-all delay-50">
       <p className="absolute top-2 right-2 text-gray-400">{category}</p>
       <Image
         src={image}
@@ -52,7 +52,7 @@ function Product({
         placeholder="blur"
         blurDataURL={true}
       />
-      <h4 className="my-3">{title}</h4>
+      <h4 className="text-lg my-3">{title}</h4>
       <p className="text-sm my-2 line-clamp-2 ">{description}</p>
       <span className="my-1">
         <Rate defaultValue={rate} allowHalf="true" />

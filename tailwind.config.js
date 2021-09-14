@@ -6,8 +6,8 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    fontFamily:{
-      "roboto": ["Roboto"],
+    fontFamily: {
+      dmMono: ["DM Mono"],
     },
     extend: {
       colors: {
@@ -15,6 +15,9 @@ module.exports = {
           light: "#1aa870",
           DEFAULT: "#008e56",
         },
+      },
+      zIndex: {
+        "-10": "-10",
       },
     },
   },

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import { Rate, notification } from "antd";
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";

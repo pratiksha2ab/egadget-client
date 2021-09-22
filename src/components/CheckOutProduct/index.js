@@ -24,9 +24,11 @@ function CheckOutProduct({ id, title, price, description, category, image }) {
     <div className="grid grid-cols-5">
       <Image src={image} height={200} width={200} objectFit="contain" />
       <div className="col-span-3 mx-5">
-        <p>{title}</p>
+        <p className="font-bold">{title}</p>
         <p className="text-xs my-2 line-clamp-3">{description}</p>
-        <Currency quantity={price} currency="NPR" />
+        <p className="font-semibold">
+          <Currency quantity={price} currency="NPR" />
+        </p>
       </div>
       <div className="flex flex-col space-y-2 my-auto justify-self-end">
         <button className="button" onClick={addItemToBasket}>

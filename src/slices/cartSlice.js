@@ -27,13 +27,21 @@ export const cartSlice = createSlice({
       }
       state.items = newCart;
     },
+    destroyCart: (state, action) => {
+     
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, destroyCart } = cartSlice.actions;
 
 //Selectors - this is how we pull information from the global store slice
 export const selectItems = (state) => state.cart.items;
 export const selectTotal = (state) =>
   state.cart.items.reduce((total, item) => total + item.price, 0);
+export const selectPrescribed = (state) =>
+  state.cart.items.reduce(
+    (prescribed, item) => prescribed || item.requirePrescription,
+    false
+  );
 export default cartSlice.reducer;

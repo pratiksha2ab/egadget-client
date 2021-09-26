@@ -1,76 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SearchIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-
-const Search = () => {
-  const [searchData, setSearchData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
-  // useEffect(async () => {
-  //   const data = await fetch("http://localhost:5000/product");
-  //   const searchItem = await data.json();
-  //   setSearchData(searchItem);
-  // }, []);
-  console.log(searchData);
-
-  const handleFilter = (e) => {
-    const searchWord = e.target.value;
-    setWordEntered(searchWord);
-    const newFilter = searchData.filter((value) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
-    });
-    if (searchWord === "") {
-      setFilteredData([]);
-    } else {
-      setFilteredData(newFilter);
-    }
+const Search = ({ products }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
+  const handleSearch = (e) => {
+    let trem = e.target.value;
+    trem = trem.toLowerCase();
+    setSearchTerm(trem);
+    setSearchResults(
+      products?.filter((product) => product.title.toLowerCase().includes(trem))
+    );
   };
-  const handleFocus = async () => {
-    const data = await fetch("http://localhost:5000/product");
-    const searchItem = await data.json();
-    setSearchData(searchItem);
-  };
-  const clearInput = () => {
-    setFilteredData([]);
-    setWordEntered("");
-  };
-  const handleBlur = () => {
-    setFilteredData([]);
+  const handleFocusLose = () => {
+    setSearchTerm("");
+    setSearchResults([]);
+    setShowResults(false);
   };
   return (
-    <>
-      {/* <div className="flex items-center max-w-xl mx-auto h-10 rounded-md flex-grow cursor-pointer bg-blue-400 hover:bg-blue-500 relative"> */}
+    <div className=" relative flex items-center flex-grow cursor-pointer  rounded-md h-10 bg-blue-400  hover:bg-blue-500">
       <input
-        className="p-2 text-sm md:text-base text-gray-700  h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
-        type="text"
-        value={wordEntered}
+        onMouseOver={() => setShowResults(true)}
+        // onBlur={() => handleFocusLose()}
+        onFocus={() => setShowResults(true)}
+        value={searchTerm}
+        onChange={handleSearch}
         placeholder="Search for products..."
-        onChange={handleFilter}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        className="p-2 px-5 h-full width-6 flex-grow rounded flex-shrink rounded-l-md focus:outline-none"
+        type="text"
       />
-      {filteredData.length === 0 ? (
+      {searchTerm == "" ? (
         <SearchIcon className="h-12 p-4 text-white" />
       ) : (
-        <XIcon className="h-12 p-4 text-white" onClick={clearInput} />
+        <XIcon className="h-12 p-4 text-white" onClick={handleFocusLose} />
       )}
-      {filteredData.slice(0, 15).length !== 0 && (
-        <div className="h-30 max-w-sm w-full bg-white flex flex-col  mx-auto p-2 rounded-lg my-1 space-y-2 overflow-y-scroll overflow-x-hidden shadow-lg absolute top-10">
-          {filteredData.map((value, key) => {
-            return (
-              <Link href={`/product/${value.id}`} key={value.id}>
-                <a
-                  target="_blank"
-                  className="text-gray-600 text-md md:text-lg hover:text-green-500"
+
+      {showResults && (
+        <div
+          onClick={() => setShowResults(true)}
+          onMouseOver={() => setShowResults(true)}
+          onMouseLeave={() => setShowResults(false)}
+          className="absolute w-full bg-white bottom-0 z-10 rounded-md"
+          style={{
+            transform: "translateY(100%)",
+            height: "auto",
+            maxHeight: "400px",
+            overflowY: "auto",
+          }}
+        >
+          {!!searchResults?.length ? (
+            searchResults.map(({ id, title, price, category }) => (
+              <Link href={`/product/${id}`}>
+                <div
+                  key={id}
+                  className="p-2 mt-2 border-b-2 rounded-md bg-gray-100 hover:bg-indigo-100 hover:shadow-md "
                 >
-                  {value.title}
-                </a>
+                  <h5 className="font-medium text-sm text-gray-600">{title}</h5>
+
+                  <p className="text-xs text-gray-400">{category}</p>
+                </div>
               </Link>
-            );
-          })}
+            ))
+          ) : (
+            <>
+              {searchTerm && (
+                <p className="text-xs text-gray-400 text-center py-2">
+                  No product found
+                </p>
+              )}
+            </>
+          )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

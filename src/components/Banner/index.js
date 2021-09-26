@@ -21,25 +21,40 @@ function Banner() {
   };
   return (
     <div className="relative z-20">
-      <div className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent bottom-0 " />
+      <div className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent bottom-0 z-20 " />
+      {/* <div className=" backdrop-blur-sm absolute bottom-2 md:top-32  z-20 rounded-lg">
+        <p className="text-base sm:text-lg md:text-xl font-bold text-gray-800 p-2">
+          Recently added products
+        </p>
+      </div> */}
       <Carousel
         responsive={responsive}
         infinite={true}
         autoPlay
         ssr={true}
-        arrows={true}
-        removeArrowOnDeviceType={["tablet","mobile"]}
-        renderArrowsWhenDisabled={true}
-        
+        arrows={false}
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        renderArrowsWhenDisabled={false}
       >
         <div>
-          <img src="https://res.cloudinary.com/odin/image/upload/v1625203385/neppharm_banners/b2_ip61ml.jpg" alt="capsule-banner" />
+          <img
+            src="https://res.cloudinary.com/odin/image/upload/v1625203385/neppharm_banners/b2_ip61ml.jpg"
+            alt="capsule-banner"
+          />
         </div>
         <div>
-          <img src="https://res.cloudinary.com/odin/image/upload/v1625203631/neppharm_banners/b1_hxpw7s.jpg" alt="thermometer-banner" />
+          <img
+            loading="lazy"
+            src="https://res.cloudinary.com/odin/image/upload/v1625203631/neppharm_banners/b1_hxpw7s.jpg"
+            alt="thermometer-banner"
+          />
         </div>
         <div>
-          <img src="https://res.cloudinary.com/odin/image/upload/v1625203684/neppharm_banners/b3_kpmyzk.jpg" alt="kit-banner" />
+          <img
+            loading="lazy"
+            src="https://res.cloudinary.com/odin/image/upload/v1625203684/neppharm_banners/b3_kpmyzk.jpg"
+            alt="kit-banner"
+          />
         </div>
       </Carousel>
     </div>

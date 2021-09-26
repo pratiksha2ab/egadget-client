@@ -16,6 +16,7 @@ const ProductDetails = ({ item }) => {
       category: item.category,
       image: item.image,
       requirePrescription: item.requirePrescription,
+      quantity: 1,
     };
     //sending product as an action to REDUX STORE cart Slice
     dispatch(addToCart(product));

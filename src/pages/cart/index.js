@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Currency from "react-currency-formatter";
 import { useContext } from "react";
 import { AuthContext } from "../../../utils/AuthContext";
+import Header from "../../components/Header";
 function Checkout() {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
@@ -14,6 +15,7 @@ function Checkout() {
   console.log("item>>>", items);
   return (
     <div className="bg-gray-200">
+      <Header />
       <main className="lg:flex max-w-screen-xl mx-auto">
         {/* left */}
         <div className="flex-grow m-5 shadow-sm">
@@ -30,6 +32,8 @@ function Checkout() {
                 description={item.description}
                 category={item.category}
                 image={item.image}
+                requirePrescription={item.requirePrescription}
+                quantity={item.quantity}
               />
             ))}
           </div>

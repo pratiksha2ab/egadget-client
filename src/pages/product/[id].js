@@ -3,6 +3,7 @@ import { Rate, notification } from "antd";
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../slices/cartSlice";
+import Header from "../../components/Header";
 const ProductDetails = ({ item }) => {
   console.log({ item });
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const ProductDetails = ({ item }) => {
       category: item.category,
       image: item.image,
       requirePrescription: item.requirePrescription,
+      quantity: 1,
     };
     //sending product as an action to REDUX STORE cart Slice
     dispatch(addToCart(product));
@@ -26,6 +28,7 @@ const ProductDetails = ({ item }) => {
   };
   return (
     <div className="bg-gray-100">
+      <Header />
       <main className="max-w-screen-xl mx-auto p-6 mt-2 ">
         <div className="bg-white p-2 md:flex">
           <div className="">

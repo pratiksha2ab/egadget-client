@@ -1,9 +1,10 @@
 import { Form, Button, Input, message, notification, Modal } from "antd";
 import "antd/dist/antd.css";
 import { auth } from "../../utils/firebase";
-import React, { useState, useContext } from "react";
-import { useRouter } from "next/router";
+import React, { useState, useContext, useEffect } from "react";
+import { Router, useRouter } from "next/router";
 import { AuthContext } from "../../utils/AuthContext";
+import Header from "../components/Header";
 
 const SignIn = () => {
   const [userInfo, setUserInfo] = useState({
@@ -15,7 +16,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const handleFormSubmit = async () => {
     setLoading(true);
     try {
@@ -46,10 +47,16 @@ const SignIn = () => {
       message.error(e?.message);
     }
   };
+  useEffect(() => {
+    if (user) {
+      router.back();
+    }
+  }, [user]);
 
   return (
     <div className="bg-gray-100">
-      <p className="text-md md:text-xl py-2 pl-6 text-gray-400 font-semibold border-b">
+      <Header />
+      <p className="text-md md:text-xl py-4 pl-6 text-gray-400 font-semibold border-b">
         Sign In to NepPharm
       </p>
       <div className="flex flex-col justify-items-center items-center max-w-md mx-auto p-2">

@@ -10,14 +10,10 @@ export default function Home({ products }) {
         <title>NepPharm</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <main className="max-w-screen-xl mx-auto pb-4">
+      <Header products={products} />
+      <main className="max-w-screen-2xl mx-auto px-2 pb-4">
         <Banner />
-        <div className="bg-gray-200">
-          <p className="text-md sm:text-lg md:text-3xl font-bold text-gray-700 px-8 py-2">
-            Recently added products
-          </p>
-        </div>
+
         <ProductFeed products={products} />
       </main>
       <Footer />

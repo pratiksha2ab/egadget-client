@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../neppharm-admin"
+		},
+		{
+			"path": "../../../../neppharm-api"
+		},
+		{
+			"path": "../../.."
+		}
+	]
+}

@@ -48,9 +48,9 @@ function Header({ products }) {
         <div className="flex p-2 h-10 items-center flex-grow sm:flex-grow-0">
           <Image
             onClick={() => router.push("/")}
-            src="/l.png"
-            width={160}
-            height={50}
+            src="/dealLogo.png"
+            width={200}
+            height={80}
             objectFit="contain"
             className="cursor-pointer"
           />

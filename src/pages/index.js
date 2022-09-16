@@ -22,7 +22,7 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const pr = await fetch("http://localhost:5000/product").then((res) =>
+  const pr = await fetch("https://fakestoreapi.com/products").then((res) =>
     res.json()
   );
   // const products = await pr.filter((prod) => {

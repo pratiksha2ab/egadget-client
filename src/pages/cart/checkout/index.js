@@ -105,11 +105,7 @@ function Checkout() {
     formData.append("phoneNumber", deliveryDetails.phone);
     formData.append("total", payload.amount / 100);
     formData.append("orderItems", JSON.stringify(cartItems));
-    await Axios({
-      method: "POST",
-      url: "http://localhost:5000/orders",
-      data: formData,
-    });
+
     payload ? setCurrentProgress(2) : null;
   };
 

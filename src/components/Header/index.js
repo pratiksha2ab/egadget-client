@@ -49,7 +49,6 @@ function Header({ products }) {
           <Image
             onClick={() => router.push("/")}
             src="/HamroDeal4.PNG"
-            
             width={190}
             height={50}
             objectFit="contain"

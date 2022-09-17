@@ -3,7 +3,6 @@ import { Form, Button, Input, Upload, message, notification } from "antd";
 import "antd/dist/antd.css";
 import { auth } from "../../utils/firebase";
 import { useRouter } from "next/router";
-import Axios from "axios";
 
 function Signup() {
   const [userDetail, setUserDetail] = useState({
@@ -26,7 +25,7 @@ function Signup() {
       );
       const users = auth.currentUser;
       console.log("my id>>>", users.uid);
-     
+
       await users.sendEmailVerification({ url: "http://localhost:3000/" });
       notification.success({
         message: "Verification Link Sent to",
@@ -79,9 +78,6 @@ function Signup() {
           className=" w-full p-6 rounded mx-auto"
           requiredMark={false}
         >
-         
-        
-
           <Form.Item
             name="username"
             label={
@@ -216,7 +212,7 @@ function Signup() {
               type="primary"
               htmlType="submit"
               className="my-3 text-md w-full"
-             size="large"
+              size="large"
               loading={loading}
             >
               Sign Up

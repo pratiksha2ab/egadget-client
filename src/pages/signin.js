@@ -55,7 +55,7 @@ const SignIn = () => {
 
   return (
     <div className="bg-gray-100">
-      <Header />
+      {/* <Header /> */}
       <p className="text-md md:text-xl py-4 pl-6 text-gray-400 font-semibold border-b">
         Sign In to HamroDeal
       </p>

@@ -60,7 +60,7 @@ function CheckOutProduct({
         <p className="font-semibold text-base">
           <Currency quantity={price} currency="NPR" /> {" * "}
           {quantity} {" = "}
-          <Currency quantity={price * quantity} />
+          <Currency currency="NPR" quantity={price * quantity} />
         </p>
       </div>
       <div className="flex flex-col space-y-2 my-auto justify-self-end">

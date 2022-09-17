@@ -6,16 +6,7 @@ import { notification, Rate, Tooltip } from "antd";
 import "antd/dist/antd.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
-function Product({
-  id,
-  title,
-  price,
-  description,
-  category,
-  image,
-  rate,
-
-}) {
+function Product({ id, title, price, description, category, image, rate }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [added, setAdded] = useState(false);
@@ -25,7 +16,6 @@ function Product({
       id,
       title,
 
-     
       category,
       image,
       rate,
@@ -57,14 +47,11 @@ function Product({
         loading="lazy"
       />
       <h4 className="text-lg my-3">{title}</h4>
-     
-      <span className="my-1">
-        <Rate defaultValue={rate} allowHalf="true" />
-      </span>
+
       <div className="mb-5 pt-2 text-xl font-semibold">
         <Currency quantity={price} currency="NPR" />
       </div>
-     
+
       <button
         onClick={addItemToCart}
         disabled={added}

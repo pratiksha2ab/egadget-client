@@ -15,7 +15,7 @@ function Checkout() {
   console.log("item>>>", items);
   return (
     <div className="bg-gray-200">
-      <Header />
+      {/* <Header /> */}
       <main className="lg:flex max-w-screen-xl mx-auto">
         {/* left */}
         <div className="flex-grow m-5 shadow-sm">

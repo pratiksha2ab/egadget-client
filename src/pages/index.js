@@ -5,6 +5,7 @@ import ProductFeed from "../components/ProductFeed";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { API } from "../../utils/api";
+import { filtersData } from "../../utils/filters";
 export default function Home() {
   const [data, setData] = useState([]);
 
@@ -21,6 +22,7 @@ export default function Home() {
   console.log(data, "data");
   useEffect(() => {
     getProductsList();
+    filtersData();
   }, []);
   return (
     <div className="bg-gray-100">

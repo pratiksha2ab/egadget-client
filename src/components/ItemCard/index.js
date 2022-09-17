@@ -49,13 +49,7 @@ function ProductAddToCart({
     });
   };
   return (
-    <Flex
-      p={50}
-      maxWidth={"500px"}
-      w="full"
-      alignItems="center"
-      justifyContent="center"
-    >
+    <Flex p={5} alignItems="center" justifyContent="center">
       <Box
         cursor={"pointer"}
         onClick={() => router.push(`product/${id}`)}
@@ -66,7 +60,14 @@ function ProductAddToCart({
         shadow="lg"
         position="relative"
       >
-        <Image src={image} alt={`Picture of ${title}`} roundedTop="lg" />
+        <Image
+          objectFit={"cover"}
+          w={400}
+          src={image}
+          height="300px"
+          alt={`Picture of ${title}`}
+          roundedTop="lg"
+        />
 
         <Box p="6">
           <Box d="flex" alignItems="baseline">

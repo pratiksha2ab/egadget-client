@@ -23,15 +23,13 @@ export default function CallToActionWithIllustration() {
           fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
           lineHeight={"110%"}
         >
-          Meeting scheduling{" "}
+          No more{" "}
           <Text as={"span"} color={"orange.400"}>
-            made easy
+            slow shopping
           </Text>
         </Heading>
         <Text color={"gray.500"} maxW={"3xl"}>
-          Never miss a meeting. Never be late for one too. Keep track of your
-          meetings and receive smart reminders in appropriate times. Read your
-          smart “Daily Agenda” every morning.
+        Discover your favorite brands and products with "HamroDeal",get your needed items here.
         </Text>
         <Stack spacing={6} direction={"row"}>
           <Button

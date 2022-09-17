@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <AuthProvider>
         <ChakraProvider>
-          <Header />
+          {/* <Header /> */}
           <CallToActionWithIllustration />
           <Component {...pageProps} />
         </ChakraProvider>

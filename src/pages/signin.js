@@ -57,7 +57,7 @@ const SignIn = () => {
     <div className="bg-gray-100">
       <Header />
       <p className="text-md md:text-xl py-4 pl-6 text-gray-400 font-semibold border-b">
-        Sign In to NepPharm
+        Sign In to HamroDeal
       </p>
       <div className="flex flex-col justify-items-center items-center max-w-md mx-auto p-2">
         <Form

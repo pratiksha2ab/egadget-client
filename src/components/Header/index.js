@@ -48,9 +48,10 @@ function Header({ products }) {
         <div className="flex p-2 h-10 items-center flex-grow sm:flex-grow-0">
           <Image
             onClick={() => router.push("/")}
-            src="/dealLogo.png"
-            width={200}
-            height={80}
+            src="/HamroDeal4.PNG"
+            
+            width={190}
+            height={50}
             objectFit="contain"
             className="cursor-pointer"
           />
@@ -96,16 +97,16 @@ function Header({ products }) {
       </div>
       {/* bottom nav */}
       <div className=" pt-2 pl-2 sm:pl-8 flex space-x-2  text-xs sm:text-sm sm:space-x-6  text-white tracking-wide font-semibold">
-        <Link href="/product/medicines">
-          <p className="link">Medicines</p>
+        <Link href="/product/hotDeal">
+          <p className="link">Hot Deals</p>
         </Link>
 
-        <Link href="/product/healthproducts">
-          <p className="link">Health Products</p>
+        <Link href="/product/newest">
+          <p className="link">Newest</p>
         </Link>
 
         <p className="link" onClick={() => router.push("/blog")}>
-          Health Corner
+          Blog
         </p>
       </div>
     </header>

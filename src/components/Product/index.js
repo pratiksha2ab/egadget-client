@@ -3,7 +3,6 @@ import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../slices/cartSlice";
 import { notification, Rate, Tooltip } from "antd";
-import { MedicineBoxOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -15,7 +14,7 @@ function Product({
   category,
   image,
   rate,
-  requirePrescription,
+
 }) {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -25,12 +24,11 @@ function Product({
     const product = {
       id,
       title,
-      price,
-      description,
+
+     
       category,
       image,
       rate,
-      requirePrescription,
       quantity: 1,
     };
     //sending product as an action to REDUX STORE cart Slice
@@ -59,28 +57,14 @@ function Product({
         loading="lazy"
       />
       <h4 className="text-lg my-3">{title}</h4>
-      <p className="text-sm my-2 line-clamp-2 ">{description}</p>
+     
       <span className="my-1">
         <Rate defaultValue={rate} allowHalf="true" />
       </span>
       <div className="mb-5 pt-2 text-xl font-semibold">
         <Currency quantity={price} currency="NPR" />
       </div>
-      {requirePrescription && (
-        <div className="py-2">
-          <Tooltip
-            title="Prescription required"
-            placement="right"
-            color="#48BB78"
-          >
-            <span className="py-2">
-              <MedicineBoxOutlined
-                style={{ fontSize: "24px", color: "#48BB78" }}
-              />
-            </span>
-          </Tooltip>
-        </div>
-      )}
+     
       <button
         onClick={addItemToCart}
         disabled={added}

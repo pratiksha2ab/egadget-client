@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import {
   FacebookOutlined,
   InstagramFilled,
@@ -8,6 +8,7 @@ import {
   YoutubeOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
+import Link from "next/link";
 const Footer = () => {
   const { TextArea } = Input;
   return (
@@ -15,15 +16,15 @@ const Footer = () => {
       <div className="flex flex-col sm:flex-row justify-between sm:space-x-6 border-b  border-blue-400 pb-4">
         <Image
           onClick={() => router.push("/")}
-          src="/l.png"
-          width={160}
+          src="/HamroDeal4.PNG"
+          width={190}
           height={50}
           objectFit="contain"
           className="cursor-pointer bg-green-500 rounded-md"
         />
         <div className="text-sm py-3 text-gray-600 md:text-md">
-          NepPharm is an online medical store started by the group of youths to
-          serve the people of almost every areas residing in Nepal. We believe
+        “DealNepal” is a full stack interactive B2C e-commerce providing
+            users with a platform to buy and review the electronics related product with 3D visualization. We believe
           in serving through excellence.
         </div>
       </div>
@@ -32,7 +33,8 @@ const Footer = () => {
           <p className="text-xl font-semibold text-gray-600">
             Got Queries? Contact us
           </p>
-          <Form layout="inline" colon={false}>
+          <Form layout="inline" colon={false} 
+            >
             <Form.Item
               label={<p className="font-semibold md:text-md">Your email</p>}
             >
@@ -43,19 +45,34 @@ const Footer = () => {
             >
               <TextArea autoSize="false" size="large" />
             </Form.Item>
+            <Form.Item>
+            <Button
+              className="my-3 text-md "
+              style={{
+                backgroundColor: "#48BB78",
+                border: "#48BB78",
+              }}
+              htmlType="submit"
+              type="primary"
+              size="medium"
+             
+            >
+              Submit
+            </Button>
+            </Form.Item>
           </Form>
         </div>
         <div className="mt-2 py-2 md:py-0 md:mt-0">
           <p className="text-xl font-semibold text-gray-600">Get In Touch</p>
           <div className="flex justify-evenly text-xl space-x-6">
-            <FacebookOutlined />
-            <InstagramOutlined />
-            <YoutubeOutlined />
+          <Link href="/" passHref><FacebookOutlined width='80px' height='80px' color='#fff'/></Link> 
+          <Link href="/" passHref><InstagramOutlined width='80px' height='80px' color='#fff'/></Link> 
+          <Link href="/" passHref><YoutubeOutlined width='80px' height='80px' color='#fff'/></Link> 
           </div>
         </div>
       </div>
       <p className="text-lg text-gray-500 text-center pt-4 ">
-        &copy; NepPharm.com
+        &copy; DealNepal.com
       </p>
     </div>
   );

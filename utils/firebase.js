@@ -1,13 +1,13 @@
 import firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDxR7a7bx47Z4Ugd4WmtTjJ2mbrFlbYgBg",
-  authDomain: "neppharm.firebaseapp.com",
-  projectId: "neppharm",
-  storageBucket: "neppharm.appspot.com",
-  messagingSenderId: "1056858012343",
-  appId: "1:1056858012343:web:5d8b68081137236768ab32",
-  measurementId: "G-ZSZ903P6SS",
+  apiKey: "AIzaSyAZY8DYNsUF_aujc11ipATOlk6x37b1FCw",
+  authDomain: "egadet-d6bb8.firebaseapp.com",
+  projectId: "egadet-d6bb8",
+  storageBucket: "egadet-d6bb8.appspot.com",
+  messagingSenderId: "466908890540",
+  appId: "1:466908890540:web:af1bd1ecafcb2498bde609",
+  measurementId: "G-9KV4144SXM"
 };
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -15,3 +15,6 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth();
 export { auth, firebase };
+
+
+

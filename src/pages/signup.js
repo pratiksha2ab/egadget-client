@@ -18,7 +18,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = async () => {
-    // setLoading(true);
+    setLoading(true);
     try {
       await auth.createUserWithEmailAndPassword(
         userDetail.email,
@@ -26,25 +26,14 @@ function Signup() {
       );
       const users = auth.currentUser;
       console.log("my id>>>", users.uid);
-      await Axios({
-        method: "POST",
-        url: "http://localhost:5000/users",
-        data: {
-          id: users.uid,
-          fullName: userDetail.fullName,
-          email: userDetail.email,
-          address: userDetail.address,
-          phone: userDetail.phone,
-          photoUrl: userDetail.photoUrl,
-        },
-      });
+     
       await users.sendEmailVerification({ url: "http://localhost:3000/" });
       notification.success({
         message: "Verification Link Sent to",
         description: userDetail?.email,
       });
       // console.log(userDetail);
-
+      setLoading(false);
       // router.push("/signin");
     } catch (e) {
       const users = auth.currentUser;
@@ -52,6 +41,7 @@ function Signup() {
       users.signOut();
       if (e.message) notification.error({ message: e?.message });
       else notification.error({ message: "Error Occured" });
+      setLoading(false);
     }
     //setLoading(false);
   };
@@ -80,7 +70,7 @@ function Signup() {
   return (
     <div className="bg-gray-100">
       <p className="text-md md:text-xl py-2 pl-6 text-gray-400 font-semibold border-b">
-        Sign Up to NepPharm
+        Sign Up to HamroDeal
       </p>
       <div className="flex flex-col justify-items-center items-center max-w-md mx-auto p-2">
         <Form
@@ -89,25 +79,8 @@ function Signup() {
           className=" w-full p-6 rounded mx-auto"
           requiredMark={false}
         >
-          <div className="flex items-center justify-center">
-            {userDetail.photoUrl && (
-              <img
-                className="w-16 h-16 rounded-full object-cover bg-gray-100 mb-2"
-                src={userDetail.photoUrl}
-                alt="profile image"
-              />
-            )}
-          </div>
-          <div className="flex justify-center items-center">
-            <Upload
-              className="flex mx-auto  mb-3"
-              showUploadList={false}
-              onChange={handleChange}
-              customRequest={dummyRequest}
-            >
-              <Button className="button">Upload Image</Button>
-            </Upload>
-          </div>
+         
+        
 
           <Form.Item
             name="username"
@@ -243,10 +216,7 @@ function Signup() {
               type="primary"
               htmlType="submit"
               className="my-3 text-md w-full"
-              style={{
-                backgroundColor: "#48BB78",
-                border: "#48BB78",
-              }}
+             size="large"
               loading={loading}
             >
               Sign Up

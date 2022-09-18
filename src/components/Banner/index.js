@@ -38,11 +38,11 @@ function Banner() {
       >
         <div>
           <img
-            src="https://res.cloudinary.com/odin/image/upload/v1625203385/neppharm_banners/b2_ip61ml.jpg"
+            src="/Banner1.png"
             alt="capsule-banner"
           />
         </div>
-        <div>
+        {/* <div>
           <img
             loading="lazy"
             src="https://res.cloudinary.com/odin/image/upload/v1625203631/neppharm_banners/b1_hxpw7s.jpg"
@@ -55,7 +55,7 @@ function Banner() {
             src="https://res.cloudinary.com/odin/image/upload/v1625203684/neppharm_banners/b3_kpmyzk.jpg"
             alt="kit-banner"
           />
-        </div>
+        </div> */}
       </Carousel>
     </div>
   );

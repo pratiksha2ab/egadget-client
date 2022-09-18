@@ -30,6 +30,7 @@ export default function Home() {
         <title>HamroDeal</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Banner/>
 
       <main className="max-w-screen-2xl mx-auto px-2 pb-4 mt-9">
         <ProductFeed products={data} />

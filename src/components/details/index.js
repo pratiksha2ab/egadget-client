@@ -72,7 +72,7 @@ export default function ProductDetailCard({
               />
             }
           >
-            <Box>
+            {/* <Box>
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
                 color={useColorModeValue("yellow.500", "yellow.300")}
@@ -85,17 +85,15 @@ export default function ProductDetailCard({
 
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                 <List spacing={2}>
-                  <ListItem>Chronograph</ListItem>
-                  <ListItem>Master Chronometer Certified</ListItem>{" "}
-                  <ListItem>Tachymeter</ListItem>
+                  <ListItem>{items?.brand}</ListItem>
+                 
                 </List>
                 <List spacing={2}>
                   <ListItem>Anti‑magnetic</ListItem>
-                  <ListItem>Chronometer</ListItem>
-                  <ListItem>Small seconds</ListItem>
+                  
                 </List>
               </SimpleGrid>
-            </Box>
+            </Box> */}
             <Box>
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
@@ -118,49 +116,70 @@ export default function ProductDetailCard({
                     </Tag>
                   ))}
                 </ListItem>
+                {items?.ram &&(
+                <ListItem>
+                <Text as={"span"} fontWeight={"bold"}>
+                  Ram:
+                </Text>{" "}
+                {items?.ram}
+              </ListItem>
+                )}
+               {items?.storage &&(
+                 <ListItem>
+                 <Text as={"span"} fontWeight={"bold"}>
+                   Storage:
+                 </Text>{" "}
+                 {items?.storage}
+               </ListItem>
+               )}
+               
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    Ram:
+                    Brand:
                   </Text>{" "}
-                  {items?.ram}
+                  {items?.brand}
                 </ListItem>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    Storage:
+                    Warrenty Period:
                   </Text>{" "}
-                  {items?.storage}
+                  {items?.warrentyPeriod}
                 </ListItem>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    Case diameter:
+                    year:
                   </Text>{" "}
-                  42 mm
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Dial color:
-                  </Text>{" "}
-                  Black
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Crystal:
-                  </Text>{" "}
-                  Domed, scratch‑resistant sapphire crystal with anti‑reflective
-                  treatment inside
+                  {items?.year}
                 </ListItem>
                 {items?.camera && (
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Camera
                     </Text>{" "}
-                    50mp
+                    {items?.camera}
                   </ListItem>
                 )}
+                {items?.battery && (
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      battery:
+                    </Text>{" "}
+                    {items?.battery}
+                  </ListItem>
+                )}
+                {items?.weight&&(
+                  <ListItem>
+                  <Text as={"span"} fontWeight={"bold"}>
+                    weight:
+                  </Text>{" "}
+                  {items?.weight}
+                </ListItem>
+                )}
+                
               </List>
               <br />
               <Text as={"span"} fontWeight={"bold"}>
-                Product Details
+                Description
               </Text>
               <div dangerouslySetInnerHTML={{ __html: items?.description }} />
             </Box>
